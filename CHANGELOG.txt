@@ -1,0 +1,3 @@
+Release 1.0.1 - 2009/05/06
+The software sources have been reorganized and an automated build procedure
+has been added.
