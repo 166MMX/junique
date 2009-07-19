@@ -1,11 +1,11 @@
-cron4j - A pure Java cron-like scheduler
+JUnique - Helps in preventing multiple instances of the same application
 ========================================
 
 Instructions
 ------------
 Unzip.
 
-Add the junique JAR to your application CLASSPATH and enjoy it.
+Add the JUnique JAR to your application CLASSPATH and enjoy it.
 
 Supported platforms: Java 2 version 1.2 or later
 
