@@ -31,7 +31,7 @@
 	<target name="doc">
 		<delete dir="${junique.dirs.api}" />
 		<mkdir dir="${junique.dirs.api}" />
-		<javadoc sourcepath="${junique.dirs.src}" destdir="${junique.dirs.api}" doctitle="junique ${version}" linksource="yes" source="1.4" access="protected" author="true" version="true" verbose="true">
+		<javadoc sourcepath="${junique.dirs.src}" destdir="${junique.dirs.api}" doctitle="junique ${version}" access="protected" author="true" version="true" verbose="true">
 			<package name="it.sauronsoftware.junique.*" />
 		</javadoc>
 	</target>
