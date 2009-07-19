@@ -77,6 +77,7 @@ class Server implements Runnable, ConnectionListener {
 	 *            who has taken the lock is not interested in message handling.
 	 */
 	public Server(String id, MessageHandler messageHandler) {
+		this.id = id;
 		this.messageHandler = messageHandler;
 	}
 
