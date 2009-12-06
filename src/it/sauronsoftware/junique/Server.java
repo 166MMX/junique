@@ -19,7 +19,6 @@
 package it.sauronsoftware.junique;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -98,9 +97,7 @@ class Server implements Runnable, ConnectionListener {
 			// Opens the server socket.
 			try {
 				serverSocket = new ServerSocket();
-				InetAddress localhost = InetAddress.getLocalHost();
-				SocketAddress socketAddress = new InetSocketAddress(localhost,
-						0);
+				SocketAddress socketAddress = new InetSocketAddress("localhost", 0);
 				serverSocket.bind(socketAddress);
 			} catch (IOException e) {
 				// Release the server socket.

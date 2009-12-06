@@ -26,7 +26,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.io.Writer;
-import java.net.InetAddress;
 import java.net.Socket;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
@@ -275,15 +274,13 @@ public class JUnique {
 			InputStream inputStream = null;
 			OutputStream outputStream = null;
 			try {
-				InetAddress localhost = InetAddress.getLocalHost();
-				socket = new Socket(localhost, port);
+				socket = new Socket("localhost", port);
 				inputStream = socket.getInputStream();
 				outputStream = socket.getOutputStream();
 				Message.write(message, outputStream);
 				response = Message.read(inputStream);
 			} catch (Throwable t) {
 				t.printStackTrace();
-				;
 			} finally {
 				if (outputStream != null) {
 					try {
