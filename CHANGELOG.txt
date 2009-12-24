@@ -1,3 +1,9 @@
+Release 1.0.4 - 2009/12/24
+Bugfix in handling messages larger than 127 chars
+
+Thanks to Fatih Ulusoy
+
+
 Release 1.0.3 - 2009/12/07
 Windows XP firewall popup has been avoided
 (the junique internal server has been

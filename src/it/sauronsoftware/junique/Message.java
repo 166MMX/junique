@@ -1,7 +1,7 @@
 /*
  * JUnique - Helps in preventing multiple instances of the same application
  * 
- * Copyright (C) 2008-2009 Carlo Pelliccia (www.sauronsoftware.it)
+ * Copyright (C) 2008-2010 Carlo Pelliccia (www.sauronsoftware.it)
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License version
@@ -44,7 +44,7 @@ class Message {
 		if (inputStream.read(b) != 4) {
 			throw new IOException("Unexpected end of stream");
 		}
-		int length = (b[0] << 24) | (b[1] << 16) | (b[2] << 8) | b[3];
+		int length = byteArrayToInt(b);
 		// Length validation.
 		if (length < 0) {
 			throw new IOException("Invalid length block");
@@ -85,12 +85,8 @@ class Message {
 			// Message length.
 			int length = message.length();
 			// The length block.
-			byte[] l = new byte[4];
-			l[0] = (byte) ((length >> 24) & 0xff);
-			l[1] = (byte) ((length >> 16) & 0xff);
-			l[2] = (byte) ((length >> 8) & 0xff);
-			l[3] = (byte) (length & 0xff);
-			outputStream.write(l);
+			byte[] lenght = intToByteArray(length);
+			outputStream.write(lenght);
 			outputStream.flush();
 			// Message block.
 			byte[] b = message.getBytes("UTF-8");
@@ -99,4 +95,35 @@ class Message {
 		}
 	}
 
+	/**
+	 * Encode an integer value in a four elements byte array.
+	 * 
+	 * @param value
+	 *            The value to be encoded.
+	 * @return The encoded value, as a four bytes array.
+	 */
+	private static byte[] intToByteArray(int value) {
+		byte[] b = new byte[4];
+		for (int i = 0; i < 4; i++) {
+			int offset = (3 - i) * 8;
+			b[i] = (byte) ((value >> offset) & 0xFF);
+		}
+		return b;
+	}
+
+	/**
+	 * Decoded a four bytes lengh array into an integer value.
+	 * 
+	 * @param b
+	 *            The source array (four elements, nothing less, nothing more)
+	 * @return The decoded integer value.
+	 */
+	private static int byteArrayToInt(byte[] b) {
+		int value = 0;
+		for (int i = 0; i < 4; i++) {
+			int shift = (3 - i) * 8;
+			value += (b[i] & 0x000000FF) << shift;
+		}
+		return value;
+	}
 }
